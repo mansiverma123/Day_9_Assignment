@@ -1,31 +1,31 @@
 #!/bin/bash -x
 
-EmpRatePerHour=20;
-NumOfWorkingDays=20;
-FullDayHour=8;
-PartTimeHour=4;
-Salary=0;
 isFullTime=1;
-isPartTime=1;
+isPartTime=2;
 totalSalary=0;
+empRatePerHrs=20;
+maxWorkingDays=20;
+maxWorkingHrs=100;
+totalEmpHrs=0;
+totalWorkingDays=0;
 
-for (( day=1; day<=$NumOfWorkingDays; day++))
+while [[ $totalEmpHrs -lt $maxWorkingHrs && $totalWorkingDays -le $maxWorkingDays ]]
 do
-	randomCheck=$((RANDOM%3))
-
+	((totalWorkingDays++))
+	 randomCheck=$((RANDOM%3))
    case $randomCheck in
-		$isFullTime)
-		empHrs=8
-		;;
-		*)
-		$isPartTime
-		empHrs=4
-		;;
+				$isFullTime)
+						empHrs=8
+						;;
+				$isPartTime)
+						empHrs=4
+						;;
+				*)
+						empHrs=0
+						;;
    esac
-
-Salary=$(($EmpRatePerHour*$empHrs));
-totalSalary=$(($totalSalary+$Salary));
-
+	totalEmpHrs=$(($totalEmpHrs+$empHrs))
 done
-echo "Monthly Salary=" $totalSalary
 
+totalSalary=$(($totalEmpHrs+$empRatePerHrs));
+echo $totalSalary
