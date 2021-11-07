@@ -1,13 +1,21 @@
 #!/bin/bash -x
 
-randomCheck=$((RANDOM%2))
-isPresent=1;
+EmpRatePerHour=20;
+NumOfWorkingDays=30
+FullDayHour=8
+HalfDayHour=4;
+totalSalary=0;
+isFullTime=1;
 
-if [ $isPresent -eq $randomCheck ];
+randomCheck=$((RANDOM%2))
+
+if [ $randomCheck -eq $isFullTime ]
 then
-   echo "Employee is Present";
+   totalSalary=$(($EmpRatePerHour*$FullDayHour))
+   echo $totalSalary
 else
-   echo "Employee is Absent";
+   totalSalary=$(($EmpRatePerHour*$HalfDayHour))
+   echo $totalSalary
 fi
 
 
